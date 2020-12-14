@@ -109,8 +109,8 @@ public class Plugin extends JavaPlugin {
 			}
 			if (!isInjected) {
 				f.setAccessible(true);
-				SimpleCommandMap oldCommandMap = (SimpleCommandMap) f.get(Bukkit.getServer());
-				f.set(Bukkit.getServer(), new FakeSimpleCommandMap(oldCommandMap));
+                                SimplePluginManager spm = (SimplePluginManager)Bukkit.getServer().getPluginManager();
+                                Field scmF = spm.getClass().getDeclaredField("commandMap");
 			}
 		} catch (Exception e) {
 			Bukkit.getServer().getLogger().log(Level.SEVERE,
